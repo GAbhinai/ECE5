@@ -1,0 +1,90 @@
+@charset "UTF-8";
+body {
+    background-color: #f5f7fb;
+    font-family: Arial, sans-serif;
+    color: #212529;
+}
+
+.courses-header {
+    padding: 65px 20px;
+    color: white;
+    background: linear-gradient(135deg, #142850, #27496d);
+}
+
+.courses-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.courses-header p {
+    font-size: 1.05rem;
+    margin-bottom: 0;
+}
+
+.course-card {
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.course-banner {
+    min-height: 110px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+}
+
+.course-banner span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1e3a8a;
+}
+
+.course-card .card-body {
+    padding: 24px;
+}
+
+.course-card .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.course-card .card-text {
+    line-height: 1.7;
+}
+
+.course-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.course-card .btn {
+    border-radius: 8px;
+    padding: 11px;
+    font-weight: 600;
+}
+
+footer {
+    background: white;
+}
+
+@media (max-width: 576px) {
+    .courses-header {
+        padding: 45px 15px;
+    }
+
+    .courses-header h1 {
+        font-size: 2rem;
+    }
+}

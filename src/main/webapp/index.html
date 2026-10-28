@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodeQuest | Master Coding. Earn XP. Level Up.</title>
+    <meta name="description"
+          content="Practice Java, SQL and DSA through coding missions, earn XP and track your progress with CodeQuest.">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Homepage-specific styles */
+
+        .home-main {
+            width: min(1240px, 92%);
+            margin: 0 auto;
+        }
+
+        .home-nav {
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-icon {
+            display: grid;
+            place-items: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #7185ff, #a78bfa);
+            color: white;
+            font-size: 23px;
+            font-weight: 900;
+            box-shadow: 0 7px 22px rgba(113, 133, 255, .3);
+        }
+
+        .brand-name {
+            color: #f5f6ff;
+            font-size: 1.5rem;
+            font-weight: 850;
+            letter-spacing: -.8px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 27px;
+        }
+
+        .nav-links a {
+            color: #c0c9e4;
+            font-size: .92rem;
+        }
+
+        .nav-links .nav-register {
+            padding: 10px 17px;
+            border: 1px solid #596ce4;
+            border-radius: 9px;
+            background: rgba(113, 133, 255, .12);
+            color: white;
+        }
+
+        .hero-home {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 45px;
+            min-height: 540px;
+            padding: clamp(30px, 6vw, 76px) 0;
+            overflow: hidden;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 23px;
+            padding: 8px 13px;
+            border: 1px solid rgba(129, 140, 248, .3);
+            border-radius: 100px;
+            background: rgba(99, 102, 241, .09);
+            color: #c6caff;
+            font-size: .83rem;
+            font-weight: 700;
+        }
+
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #70e5b0;
+            box-shadow: 0 0 12px #70e5b0;
+        }
+
+        .hero-home h1 {
+            max-width: 720px;
+            font-size: clamp(2.8rem, 5.5vw, 4.7rem);
+            line-height: 1.08;
+            letter-spacing: -2.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero-gradient {
+            display: block;
+            background: linear-gradient(
+                100deg,
+                #93a5ff,
+                #c6a5ff 60%,
+                #83dcff
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            max-width: 570px;
+            margin-bottom: 30px;
+            font-size: 1.08rem;
+            line-height: 1.9;
+            color: #aab6d4;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-actions .btn {
+            padding: 14px 22px;
+            min-height: 50px;
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid #34415f;
+            color: #e6eaff;
+        }
+
+        .hero-note {
+            margin-top: 24px;
+            font-size: .86rem;
+            color: #7f8eaf;
+        }
+
+        .hero-visual {
+            position: relative;
+            min-width: 0;
+        }
+
+        .visual-glow {
+            position: absolute;
+            inset: 5% -5%;
+            background: rgba(105, 90, 255, .18);
+            filter: blur(75px);
+            border-radius: 50%;
+        }
+
+        .code-window {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #354264;
+            border-radius: 19px;
+            background: rgba(15, 22, 42, .96);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+            transform: rotate(1deg);
+        }
+
+        .window-bar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 15px 18px;
+            border-bottom: 1px solid #293552;
+            background: #19223b;
+        }
+
+        .window-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff7185;
+        }
+
+        .window-dot:nth-child(2) {
+            background: #f8c568;
+        }
+
+        .window-dot:nth-child(3) {
+            background: #5ce0a2;
+        }
+
+        .window-title {
+            margin-left: auto;
+            color: #91a0c0;
+            font-size: .76rem;
+        }
+
+        .code-content {
+            padding: 25px 24px 30px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: clamp(.78rem, 1.25vw, .96rem);
+            line-height: 2;
+            overflow-x: auto;
+            color: #dce5ff;
+            white-space: nowrap;
+        }
+
+        .code-comment {
+            color: #8392b6;
+        }
+
+        .code-purple {
+            color: #c5a5ff;
+        }
+
+        .code-blue {
+            color: #84caff;
+        }
+
+        .code-green {
+            color: #83e5b3;
+        }
+
+        .code-yellow {
+            color: #f8d68a;
+        }
+
+        .code-indent {
+            padding-left: 22px;
+        }
+
+        .xp-float {
+            position: absolute;
+            right: -15px;
+            bottom: 28px;
+            padding: 15px 19px;
+            border: 1px solid #43518a;
+            border-radius: 13px;
+            background: #202a4b;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .3);
+            transform: rotate(-3deg);
+        }
+
+        .xp-float strong {
+            display: block;
+            color: #a9b7ff;
+            font-size: 1.3rem;
+        }
+
+        .xp-float span {
+            color: #aab6d4;
+            font-size: .76rem;
+        }
+
+        .section-heading {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 12px;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+
+        .section-heading p {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .home-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 5px 0 90px;
+            border: 1px solid #293654;
+            border-radius: 17px;
+            background: rgba(21, 29, 51, .72);
+        }
+
+        .home-stat {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .home-stat + .home-stat {
+            border-left: 1px solid #293654;
+        }
+
+        .home-stat strong {
+            display: block;
+            color: #e8ebff;
+            font-size: 1.35rem;
+        }
+
+        .home-stat span {
+            color: #929fbe;
+            font-size: .87rem;
+        }
+
+        .challenge-section {
+            padding: 10px 0 85px;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 21px;
+        }
+
+        .challenge-card {
+            position: relative;
+            padding: 28px;
+            border: 1px solid #293654;
+            border-radius: 17px;
+            background: linear-gradient(145deg, #172039, #11182c);
+            transition: transform .25s, border-color .25s;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            border-color: #6478f3;
+        }
+
+        .challenge-icon {
+            display: grid;
+            place-items: center;
+            width: 53px;
+            height: 53px;
+            margin-bottom: 22px;
+            border-radius: 15px;
+            background: rgba(113, 133, 255, .14);
+            border: 1px solid rgba(113, 133, 255, .22);
+            color: #b9c3ff;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .challenge-card:nth-child(2) .challenge-icon {
+            background: rgba(52, 211, 153, .1);
+            color: #70e5b0;
+            border-color: rgba(52, 211, 153, .2);
+        }
+
+        .challenge-card:nth-child(3) .challenge-icon {
+            background: rgba(192, 132, 252, .12);
+            color: #d0adff;
+            border-color: rgba(192, 132, 252, .2);
+        }
+
+        .challenge-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+        }
+
+        .challenge-card p {
+            min-height: 78px;
+            font-size: .93rem;
+            line-height: 1.8;
+        }
+
+        .challenge-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: .9rem;
+        }
+
+        .cta-section {
+            margin-bottom: 75px;
+            padding: clamp(30px, 5vw, 55px);
+            text-align: center;
+            border: 1px solid #3b4774;
+            border-radius: 22px;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(113, 133, 255, .22),
+                    transparent 65%
+                ),
+                #141c33;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+        }
+
+        .cta-section p {
+            max-width: 570px;
+            margin: 15px auto 25px;
+        }
+
+        .home-footer {
+            padding: 28px 5%;
+            border-top: 1px solid #27324d;
+            text-align: center;
+            color: #7f8eaf;
+            font-size: .87rem;
+        }
+
+        @media (max-width: 850px) {
+            .hero-home {
+                grid-template-columns: 1fr;
+                gap: 42px;
+                padding-top: 55px;
+            }
+
+            .hero-visual {
+                width: min(560px, 100%);
+                margin: 0 auto;
+            }
+
+            .hero-home h1 {
+                font-size: clamp(2.7rem, 8vw, 4rem);
+            }
+
+            .challenge-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .challenge-card p {
+                min-height: auto;
+            }
+
+            .home-stats {
+                margin-bottom: 65px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .home-nav {
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                width: 100%;
+                gap: 13px;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                font-size: .82rem;
+            }
+
+            .hero-home h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .home-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .home-stat + .home-stat {
+                border-left: none;
+                border-top: 1px solid #293654;
+            }
+
+            .xp-float {
+                right: 5px;
+                bottom: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar home-nav">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">C</span>
+            <span class="brand-name">CodeQuest</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="#challenges">Explore</a>
+            <a href="login.jsp">Student Login</a>
+            <a href="courses">Courses</a>
+            <a href="admin-login.jsp">Admin</a>
+            
+            <a href="register.jsp" class="nav-register">Get Started ↗</a>
+        </div>
+    </nav>
+
+    <main class="home-main">
+
+        <!-- Hero -->
+        <section class="hero-home">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    YOUR CODING JOURNEY STARTS HERE
+                </div>
+
+                <h1>
+                    Don't just learn code.
+                    <span class="hero-gradient">
+                        Level up your skills.
+                    </span>
+                </h1>
+
+                <p class="hero-description">
+                    Turn practice into progress. Solve programming
+                    challenges, earn XP, complete missions and build
+                    your confidence one line of code at a time.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="register.jsp" class="btn">
+                        Start Your Quest &nbsp; →
+                    </a>
+
+                    <a href="#challenges" class="btn btn-outline">
+                        Explore Challenges
+                    </a>
+                </div>
+
+                <p class="hero-note">
+                    Java · SQL · Data Structures & Algorithms
+                </p>
+
+            </div>
+
+            <!-- Decorative coding window -->
+            <div class="hero-visual">
+
+                <div class="visual-glow"></div>
+
+                <div class="code-window">
+
+                    <div class="window-bar">
+                        <span class="window-dot"></span>
+                        <span class="window-dot"></span>
+                        <span class="window-dot"></span>
+                        <span class="window-title">your_next_level.java</span>
+                    </div>
+
+                    <div class="code-content">
+                        <div class="code-comment">
+                            // Every expert started somewhere.
+                        </div>
+
+                        <div>
+                            <span class="code-purple">public class</span>
+                            <span class="code-blue"> Developer</span> {
+                        </div>
+
+                        <div class="code-indent">
+                            <span class="code-purple">public static void</span>
+                            <span class="code-yellow"> main</span>() {
+                        </div>
+
+                        <div class="code-indent">
+                            <span class="code-indent">
+                                <span class="code-blue">String</span>
+                                goal =
+                                <span class="code-green">"Level Up"</span>;
+                            </span>
+                        </div>
+
+                        <div class="code-indent">
+                            <span class="code-purple">while</span>
+                            (keepLearning) {
+                        </div>
+
+                        <div class="code-indent">
+                            <span class="code-indent">
+                                <span class="code-yellow">solveChallenge</span>();
+                            </span>
+                        </div>
+
+                        <div class="code-indent">
+                            <span class="code-indent">
+                                <span class="code-yellow">earnXP</span>();
+                            </span>
+                        </div>
+
+                        <div class="code-indent">}</div>
+                        <div class="code-indent">}</div>
+                        <div>}</div>
+
+                        <br>
+
+                        <div class="code-comment">
+                            // Your next achievement awaits...
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="xp-float">
+                    <strong>+ XP</strong>
+                    <span>Every challenge counts</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Platform highlights -->
+        <section class="home-stats" aria-label="Platform features">
+
+            <div class="home-stat">
+                <strong>Learn by Doing</strong>
+                <span>Practice with coding challenges</span>
+            </div>
+
+            <div class="home-stat">
+                <strong>Earn XP</strong>
+                <span>Make progress as you solve missions</span>
+            </div>
+
+            <div class="home-stat">
+                <strong>Track Progress</strong>
+                <span>See your achievements and ranking</span>
+            </div>
+
+        </section>
+
+        <!-- Challenge categories -->
+        <section class="challenge-section" id="challenges">
+
+            <div class="section-heading">
+                <div class="eyebrow">FIND YOUR NEXT CHALLENGE</div>
+
+                <h2>Skills that move you forward</h2>
+
+                <p>
+                    Strengthen your foundations, practise problem-solving
+                    and develop the skills that every developer needs.
+                </p>
+            </div>
+
+            <div class="challenge-grid">
+
+                <article class="challenge-card">
+                    <div class="challenge-icon">J</div>
+
+                    <h3>Java Programming</h3>
+
+                    <p>
+                        Master variables, control statements, methods,
+                        object-oriented programming and core Java concepts.
+                    </p>
+
+                    <a href="register.jsp" class="challenge-link">
+                        Start learning →
+                    </a>
+                </article>
+
+                <article class="challenge-card">
+                    <div class="challenge-icon">SQL</div>
+
+                    <h3>SQL & Databases</h3>
+
+                    <p>
+                        Practise SELECT queries, filtering, joins and
+                        database operations through practical challenges.
+                    </p>
+
+                    <a href="register.jsp" class="challenge-link">
+                        Explore SQL →
+                    </a>
+                </article>
+
+                <article class="challenge-card">
+                    <div class="challenge-icon">{ }</div>
+
+                    <h3>Data Structures & Algorithms</h3>
+
+                    <p>
+                        Improve logical thinking with arrays, stacks,
+                        queues, searching, sorting and algorithms.
+                    </p>
+
+                    <a href="register.jsp" class="challenge-link">
+                        Build your logic →
+                    </a>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Final call to action -->
+        <section class="cta-section">
+
+            <h2>Ready to begin your quest?</h2>
+
+            <p>
+                Every great developer started with a single step.
+                Start practising today and make your next step count.
+            </p>
+
+            <a href="register.jsp" class="btn">
+                Create Your Account &nbsp; 
+            </a>
+
+            <p style="margin-top:18px; margin-bottom:0; font-size:.9rem;">
+                Already registered?
+                <a href="login.jsp">Sign in to continue</a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer class="home-footer">
+        <p>
+            © 2026 CodeQuest · Learn. Practise. Progress.
+        </p>
+    </footer>
+
+</body>
+</html>
